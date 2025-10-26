@@ -1,13 +1,11 @@
 {
   "version": 2,
-  "builds": [
-      {
-          "src": "**.php",
-          "use": "@devsense/vercel-php"
-      }
-  ],
+  "functions": {
+    "api/index.php": {
+      "runtime": "@vercel/php@0.7.0"
+    }
+  },
   "routes": [
-      { "src": "/(.*\\.php)", "dest": "/$1" },
-      { "src": "/(.*)", "dest": "/$1.php" }
+    { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }

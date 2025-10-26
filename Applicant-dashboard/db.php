@@ -4,10 +4,11 @@
  */
 
 // --- Database Configuration: Heroku vs. Local ---
-$db_url = getenv('CLEARDB_DATABASE_URL');
+// Vercel uses DATABASE_URL, Heroku might use CLEARDB_DATABASE_URL. We check both.
+$db_url = getenv('DATABASE_URL') ?: getenv('CLEARDB_DATABASE_URL');
 
 if ($db_url) {
-    // Production environment (Heroku)
+    // Production environment (Vercel/Heroku)
     $url_parts = parse_url($db_url);
     if (!defined('DB_HOST')) define('DB_HOST', $url_parts['host']);
     if (!defined('DB_USER')) define('DB_USER', $url_parts['user']);

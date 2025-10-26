@@ -14,30 +14,30 @@
 
 // --- Main Email Switch ---
 // Set to true to enable sending emails, false to disable.
-define('MAIL_SMTP_ENABLED', true);
+define('MAIL_SMTP_ENABLED', getenv('MAIL_SMTP_ENABLED') ?: true);
 
 // --- Application URL ---
 // The base URL of the application. IMPORTANT: For local development, use your computer's
 // local network IP address instead of 'localhost' so that links in emails are accessible
 // from other devices on your network (like your phone).
 // In production, this should be your actual domain name (e.g., 'https://www.onlinebizpermit.com').
-// To find your local IP on Windows, open Command Prompt and type 'ipconfig'. Look for the IPv4 address.
-define('APP_BASE_URL', 'http://localhost/onlinebizpermit'); // <-- IMPORTANT: REPLACE YOUR_PC_IP_ADDRESS with the IPv4 address you found.
+// On Heroku, this is set via an environment variable.
+define('APP_BASE_URL', getenv('APP_BASE_URL') ?: 'http://localhost/onlinebizpermit');
 
 // --- SMTP Debugging ---
 // 0 = off (for production)
 // 2 = client and server messages (for debugging)
-define('MAIL_SMTP_DEBUG', 2);
+define('MAIL_SMTP_DEBUG', getenv('MAIL_SMTP_DEBUG') ?: 0); // Default to 0 for production
 
 // --- SMTP Server Settings (example for Gmail) ---
-define('MAIL_SMTP_HOST', 'smtp.gmail.com');
-define('MAIL_SMTP_PORT', 587); // Use 587 for TLS, or 465 for SSL
-define('MAIL_SMTP_SECURE', 'tls'); // 'tls' or 'ssl'
+define('MAIL_SMTP_HOST', getenv('MAIL_SMTP_HOST') ?: 'smtp.gmail.com');
+define('MAIL_SMTP_PORT', getenv('MAIL_SMTP_PORT') ?: 587); // Use 587 for TLS, or 465 for SSL
+define('MAIL_SMTP_SECURE', getenv('MAIL_SMTP_SECURE') ?: 'tls'); // 'tls' or 'ssl'
 
 // --- SMTP Authentication ---
-define('MAIL_SMTP_USERNAME', 'atdelacruz@catsu.edu.ph'); // <-- IMPORTANT: Replace with your full Gmail address
-define('MAIL_SMTP_PASSWORD', 'kmhd qeao jkij ylnt'); // <-- IMPORTANT: Replace with the 16-character App Password you generated
+define('MAIL_SMTP_USERNAME', getenv('MAIL_SMTP_USERNAME') ?: 'atdelacruz@catsu.edu.ph'); // <-- IMPORTANT: Replace with your full Gmail address
+define('MAIL_SMTP_PASSWORD', getenv('MAIL_SMTP_PASSWORD') ?: 'kmhd qeao jkij ylnt'); // <-- IMPORTANT: Replace with the 16-character App Password you generated
 
 // --- Sender Information ---
-define('MAIL_FROM_EMAIL', 'atdelacruz@catsu.edu.ph'); // Can be the same as username
-define('MAIL_FROM_NAME', 'OnlineBizPermit Support'); // The name recipients will see
+define('MAIL_FROM_EMAIL', getenv('MAIL_FROM_EMAIL') ?: 'atdelacruz@catsu.edu.ph'); // Can be the same as username
+define('MAIL_FROM_NAME', getenv('MAIL_FROM_NAME') ?: 'OnlineBizPermit Support'); // The name recipients will see
